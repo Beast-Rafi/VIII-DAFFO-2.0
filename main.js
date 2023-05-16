@@ -34,44 +34,25 @@ export default function takeCredentialsFromDatabas(stdCardArea) {
             // function addItemInDom()
         })
         // console.log(userArr)
+        for (let i = 0; i < userArr.length; i++) {
+            stdArea.innerHTML += 
+                    `
+                        <div class="student-card">
+                            <img src="./assets/landing-page-img.jpeg" alt="">
+                            <div id="std-crd">
+                            <h2>${userArr[i].Type}</h2>
+                            <p>Name:${userArr[i].Name}</p>
+                            <p>ID:${userArr[i].ID}</p>
+                            <p>House:${userArr[i].House}</p>
+                            <p>System ID:${userArr[i].id}</p>
+                            </div>
+                        <div>
+                    `
+            }
+        
     })
-    return userArr
+    // addStdCrdHtml(userArr)
 }
-
-
-function addItemInDom() {
-    let userArr = takeCredentialsFromDatabas()  
-    addStdCrdHtml(userArr)
-    console.log(userArr)
-}
-addItemInDom()
-function addStdCrdHtml(userCred) {
-    // let stdDiv = 
-    // `
-    // <img src="./assets/landing-page-img.jpeg" alt="">
-    // <div id="std-crd">
-    //   <h2>${user.type}</h2>
-    //   <p>Name:${user.name}</p>
-    //   <p>ID:${user.ID}</p>
-    //   <p>House:${user.house}</p>
-    //   <p>System ID:</p>
-    // </div>
-    // `
-    for (let i = 0; i < userCred.lenght; i++) {
-        stdArea.innerHTML += 
-            `
-                <div class="student-card">
-                    <img src="./assets/landing-page-img.jpeg" alt="">
-                    <div id="std-crd">
-                    <h2>${userCred[i].type}</h2>
-                    <p>Name:${userCred[i].name}</p>
-                    <p>ID:${userCred[i].ID}</p>
-                    <p>House:${userCred[i].house}</p>
-                    <p>System ID:</p>
-                    </div>
-                <div>
-            `
-    }
-}
+takeCredentialsFromDatabas()
 // --------------------------DOM CODE------------------------------
 
