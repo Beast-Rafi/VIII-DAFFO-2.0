@@ -132,7 +132,7 @@ body::-webkit-scrollbar-thumb{
   flex-direction: column;
   gap: .3rem;
   width: 250px;
-  height: 320px;
+  height: 400px;
   background: linear-gradient(to bottom, #2e2e2e, #585858);
   color: #fff;
   font-family: var(--paragraph-font);
@@ -140,7 +140,7 @@ body::-webkit-scrollbar-thumb{
   box-shadow: 10px 9px 28px 2px rgba(38,38,38,0.79);
   transition: all .3s cubic-bezier(0.44, 0.06, 0, 0.8);
 }
-#students-area{
+#students-area,#captain-area{
   padding: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -149,7 +149,8 @@ body::-webkit-scrollbar-thumb{
   align-content: center;
 }
 .student-card img{
-  width: 100%;
+  align-self: center;
+  width: 250px;
   border-top-right-radius: 7px ;
   border-top-left-radius: 7px ;
 }

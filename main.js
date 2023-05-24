@@ -1,13 +1,14 @@
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import {
     getFirestore,
-    collection,getDocs, onSnapshot,
-    addDoc, deleteDoc, doc
+    collection, onSnapshot,
 } from "firebase/firestore"
-// import './styles.css'
+
 //-------------------------Import Element From Dom------------------
 const studentCardCredentials = document.querySelector('#std-card')
 const stdArea = document.getElementById("students-area")
+const capArea = document.getElementById("captain-area")
 //-------------------------END-------------------------------------
 
 const firebaseConfig = {
@@ -24,35 +25,55 @@ initializeApp(firebaseConfig);
 const db = getFirestore()
 
 const colRef = collection(db, 'users')
+const storage = getStorage()
 
-
+const storageRef = ref(storage, "Student Images/01194816.png")
+const fallbackImageSrc = "./assets/landing-page-img.jpeg";
 export default function takeCredentialsFromDatabas(stdCardArea) {
     let userArr = []
     onSnapshot(colRef, (snapshot) =>{
         snapshot.docs.forEach((doc) => {
-            userArr.push({...doc.data(), id: doc.id })
+            // userArr.push({...doc.data(), id: doc.id })
             // function addItemInDom()
+            userArr.push({...doc.data(), id: doc.id });
+        getDownloadURL(ref(storage, `Student Images/${doc.id}.png`))
+        .then((downloadURL) => {
+            const imgElement = document.querySelector(`#img-${doc.id}`);
+            imgElement.src = downloadURL;
         })
-        // console.log(userArr)
+        .catch((error) => {
+            console.error("Error getting download URL:", error);
+            // If image is not found, set the fallback image
+            const imgElement = document.querySelector(`#img-${doc.id}`);
+            imgElement.src = fallbackImageSrc;
+        });
+
+        })
+        // getDownloadURL(storage, ref(storage, "Student Images/01194816.png"))
         for (let i = 0; i < userArr.length; i++) {
-            stdArea.innerHTML += 
-                    `
-                        <div class="student-card">
-                            <img src="./assets/landing-page-img.jpeg" alt="">
-                            <div id="std-crd">
-                            <h2>${userArr[i].Type}</h2>
-                            <p>Name:${userArr[i].Name}</p>
-                            <p>ID:${userArr[i].ID}</p>
-                            <p>House:${userArr[i].House}</p>
-                            <p>System ID:${userArr[i].id}</p>
-                            </div>
-                        <div>
-                    `
+            let html = 
+            `
+            <div class="student-card">
+              <img id="img-${userArr[i].id}" alt="${userArr[i].id}">
+              <div id="std-crd">
+                <h2>${userArr[i].Type}</h2>
+                <p>Name:${userArr[i].Name}</p>
+                <p>ID:${userArr[i].id}</p>
+                <p>House:${userArr[i].House}</p>
+              </div>
+            </div>
+            `;
+                        if(userArr[i].Type === 'Student'){
+                stdArea.innerHTML += html
+            }else{
+                capArea.innerHTML += html
             }
-        
+        }
+    
     })
     // addStdCrdHtml(userArr)
 }
 takeCredentialsFromDatabas()
+
 // --------------------------DOM CODE------------------------------
 

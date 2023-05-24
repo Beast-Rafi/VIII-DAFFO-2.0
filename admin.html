@@ -11,18 +11,18 @@
     <div class="work-area">
       <h1>Welcome Admin !!😀</h1>
       <h3>Submit A new Student</h3>
-      <input type="text" placeholder="Type Student's Name" id="name-input-el" />
-      <input type="text" placeholder="Type Student's ID" id="ID-input-el" />
-      <input
-      type="text"
-        placeholder="Type Student's House"
-        id="House-input-el"
-        />
-        <input type="text" placeholder="Student's Type?" id="Type-input-el" />
-        <button id="submit-btn">SUBMIT NEW USER</button>
-        <input type="text" id="delete-user">
-        <button id="delete-user-btn"></button>
-      </div>
-      <script src="student-data.js" type="module"></script>
+    
+      <form id="form-el">
+        <input class="text-input" type="text" placeholder="Type Student's Name" name="name" />
+        <input class="text-input" type="text" placeholder="Type Student's ID" name="id" />
+        <input class="text-input" type="text" placeholder="Type Student's House" name="house"/>
+        <input class="text-input" type="text" placeholder="Student's Type?" name="type" />
+      </form>
+      <input type="file" placeholder="Choose your IMG" id="imageInput">
+      <button id="submit-btn">SUBMIT NEW USER</button>
+      <input type="text" id="delete-user" />
+      <button id="delete-user-btn"></button>
+    </div>
+    <script src="addStudent.js" type="module"></script>
   </body>
 </html>
